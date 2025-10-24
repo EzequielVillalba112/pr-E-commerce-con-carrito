@@ -4,18 +4,18 @@ import { ImgContainer } from "../atomos/ImgContainer"
 import { CategoryProduct } from "../organismos/CategoryProduct"
 import { ListProduct } from "../organismos/ListProduct"
 
-export const ProductsPageTemplate = () => {
+export const ProductsPageTemplate = ({ products, categories }) => {
   return (
     <ProductsPageTemplateContainer>
         <Hero>
             <ImgContainer src={BgHero} alt="Background Hero" />
             <div className="glass"></div>
-            <h2>Bienvenido a FakeMart</h2>
+            <h2>Welcome to FakeMart</h2>
         </Hero>
 
         <ProductsContainer>
-            <CategoryProduct />
-            <ListProduct />
+            <CategoryProduct categories={categories} />
+            <ListProduct products={products} />
         </ProductsContainer>
         
     </ProductsPageTemplateContainer>
@@ -65,7 +65,7 @@ const ProductsContainer = styled.div`
     border-radius: 16px;
     padding: 20px;
     display: flex;
-    gap: 40px;
+    gap: 20px;
     justify-content: flex-start;
     align-items: start;
 `

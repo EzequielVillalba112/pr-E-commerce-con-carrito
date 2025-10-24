@@ -1,91 +1,45 @@
 import styled from "styled-components";
+import { ItemListProduct } from "../moleculas/ItemListProduct";
+import { useState } from "react";
+import { NavPageList } from "../moleculas/NavPageList";
 
-export const ListProduct = () => {
-  const products = [
-    {
-      id: 1,
-      title: "Smartphone X200",
-      price: 699.99,
-      image: "https://via.placeholder.com/150",
-      category: "electronics",
-    },
-    {
-      id: 2,
-      title: "Auriculares Inalámbricos",
-      price: 129.99,
-      image: "https://via.placeholder.com/150",
-      category: "electronics",
-    },
-    {
-      id: 3,
-      title: "Reloj Deportivo",
-      price: 199.99,
-      image: "https://via.placeholder.com/150",
-      category: "electronics",
-    },
-    {
-      id: 4,
-      title: "Anillo de Plata",
-      price: 59.99,
-      image: "https://via.placeholder.com/150",
-      category: "jewelery",
-    },
-    {
-      id: 5,
-      title: "Vestido de Verano",
-      price: 89.99,
-      image: "https://via.placeholder.com/150",
-      category: "women's clothing",
-    },
-    {
-      id: 6,
-      title: "Camisa Casual",
-      price: 49.99,
-      image: "https://via.placeholder.com/150",
-      category: "men's clothing",
-    },
-    {
-      id: 11,
-      title: "Smartphone X200",
-      price: 699.99,
-      image: "https://via.placeholder.com/150",
-      category: "electronics",
-    },
-    {
-      id: 22,
-      title: "Auriculares Inalámbricos",
-      price: 129.99,
-      image: "https://via.placeholder.com/150",
-      category: "electronics",
-    },
-    {
-      id: 13,
-      title: "Smartphone X200",
-      price: 699.99,
-      image: "https://via.placeholder.com/150",
-      category: "electronics",
-    },
-    {
-      id: 24,
-      title: "Auriculares Inalámbricos",
-      price: 129.99,
-      image: "https://via.placeholder.com/150",
-      category: "electronics",
-    },
-  ];
+export const ListProduct = ({ products }) => {
+  // Estado para la página actual
+  const [currentPage, setCurrentPage] = useState(1);
+  // Número de productos por página
+  const productsPerPage = 6;
+
+  // Calcular los índices
+  const indexOfLast = currentPage * productsPerPage;
+  const indexOfFirst = indexOfLast - productsPerPage;
+  const currentProducts = products.slice(indexOfFirst, indexOfLast);
+
+  // Número total de páginas
+  const totalPages = Math.ceil(products.length / productsPerPage);
 
   return (
-    <ListProductContainer>
-      {products.map((product) => (
-        <div key={product.id}>
-          <img src={product.image} alt={product.title} />
-          <h4>{product.title}</h4>
-          <p>${product.price.toFixed(2)}</p>
-        </div>
-      ))}
-    </ListProductContainer>
+    <Container>
+      <ListProductContainer>
+        {currentProducts.map((product) => (
+          <ItemListProduct key={product.id} product={product} />
+        ))}
+      </ListProductContainer>
+      {/* Botones de paginación */}
+      <NavPageList
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
+    </Container>
   );
 };
+
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const ListProductContainer = styled.div`
   width: 100%;
@@ -103,36 +57,5 @@ const ListProductContainer = styled.div`
   /* Móvil: 1 columna */
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
-  }
-
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fafafa;
-    height: 400px;
-
-    img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      margin-bottom: 12px;
-      border-radius: 4px;
-    }
-
-    h4 {
-      margin: 0 0 8px;
-      text-align: center;
-    }
-
-    p {
-      margin: 0;
-      color: #333;
-      font-weight: 500;
-    }
   }
 `;

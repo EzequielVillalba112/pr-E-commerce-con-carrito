@@ -13,7 +13,7 @@ export const NavBar = ({ cartCount = 1 }) => {
 
       <Input
         type={"text"}
-        placeholder={"Buscar Productos..."}
+        placeholder={"Search Products..."}
         icono={CiSearch}
       />
       <CartButton>

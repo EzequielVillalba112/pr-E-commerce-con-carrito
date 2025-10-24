@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ItemList = ({ item }) => {
   return (
     <ItemListContainer>
-      <label>{item.label}</label>
+      <label>{item}</label>
     </ItemListContainer>
   );
 };
@@ -23,6 +23,7 @@ const ItemListContainer = styled.li`
     display: flex;
     align-items: center;
     border-radius: 8px;
+    text-transform: capitalize;
 
     &:hover {
       background-color: #f1f1f1;

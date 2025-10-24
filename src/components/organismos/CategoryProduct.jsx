@@ -1,20 +1,14 @@
 import styled from "styled-components";
 import { ItemList } from "../moleculas/ItemList";
 
-export const CategoryProduct = () => {
-  const categories = [
-    { id: 1, name: "electronics", label: "Electrónica", icon: "💻" },
-    { id: 2, name: "jewelery", label: "Joyería", icon: "💍" },
-    { id: 3, name: "men's clothing", label: "Ropa de Hombre", icon: "👔" },
-    { id: 4, name: "women's clothing", label: "Ropa de Mujer", icon: "👗" },
-  ];
+export const CategoryProduct = ({categories}) => {
 
   return (
     <CategoryProductContainer>
-      <CategoryProductTitle>Categorías</CategoryProductTitle>
+      <CategoryProductTitle>Categories</CategoryProductTitle>
       <CategoryList>
-        {categories.map((category) => (
-          <ItemList key={category.id} item={category} />
+        {categories.map((category,i) => (
+          <ItemList key={i} item={category} />
         ))}
       </CategoryList>
     </CategoryProductContainer>
