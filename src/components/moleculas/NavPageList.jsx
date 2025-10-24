@@ -15,16 +15,14 @@ export const NavPageList = ({ totalPages, currentPage, setCurrentPage }) => {
       )}
 
       {Array.from({ length: totalPages }).map((_, i) => (
-        <>
-          <Btn
-            text={i + 1}
-            bgcolor={currentPage === i + 1 ? "#1976d2" : "#e0e0e0"}
-            textcolor={currentPage === i + 1 ? "#ffffff" : "#333333"}
-            key={i}
-            function={() => setCurrentPage(i + 1)}
-            disabled={currentPage === i + 1}
-          />
-        </>
+        <Btn
+          text={i + 1}
+          bgcolor={currentPage === i + 1 ? "#1976d2" : "#e0e0e0"}
+          textcolor={currentPage === i + 1 ? "#ffffff" : "#333333"}
+          key={i}
+          function={() => setCurrentPage(i + 1)}
+          disabled={currentPage === i + 1}
+        />
       ))}
 
       {currentPage < totalPages && (

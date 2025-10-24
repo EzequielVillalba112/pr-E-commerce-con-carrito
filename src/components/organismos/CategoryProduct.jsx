@@ -1,15 +1,34 @@
 import styled from "styled-components";
 import { ItemList } from "../moleculas/ItemList";
+import { AllProduct } from "../../store/AllProducts";
+import { useState } from "react";
 
-export const CategoryProduct = ({categories}) => {
+export const CategoryProduct = ({ categories }) => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const { setProductsByCategory } = AllProduct();
+
+  const handleClick = (category) => {
+    setProductsByCategory(category);
+    setSelectedCategory(category);
+  };
 
   return (
     <CategoryProductContainer>
       <CategoryProductTitle>Categories</CategoryProductTitle>
       <CategoryList>
-        {categories.map((category,i) => (
-          <ItemList key={i} item={category} />
+        {categories.map((category, i) => (
+          <ItemList
+            key={i}
+            item={category}
+            handleClick={() => handleClick(category)}
+            selectedCategory={selectedCategory}
+          />
         ))}
+        <ItemList
+          key={"all"}
+          item={"all"}
+          handleClick={() => handleClick("")}
+        />
       </CategoryList>
     </CategoryProductContainer>
   );
