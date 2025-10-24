@@ -3,12 +3,14 @@ import BgHero from "../../assets/bg-shop.jpg";
 import { ImgContainer } from "../atomos/ImgContainer";
 import { CategoryProduct } from "../organismos/CategoryProduct";
 import { ListProduct } from "../organismos/ListProduct";
+import { useState } from "react";
 
 export const ProductsPageTemplate = ({
   productsAll,
   productsCategory = [],
   categories,
 }) => {
+  const [categoriesState, setCategoriesState] = useState(false);
   return (
     <ProductsPageTemplateContainer>
       <Hero>
@@ -18,8 +20,13 @@ export const ProductsPageTemplate = ({
       </Hero>
 
       <ProductsContainer>
-        <CategoryProduct categories={categories} />
-        <ListProduct products={productsCategory.length > 0 ? productsCategory : productsAll} />
+        <CategoryProduct categories={categories} setCategoriesState={setCategoriesState} categoriesState={categoriesState} />
+        <ListProduct
+          products={
+            productsCategory.length > 0 ? productsCategory : productsAll
+          }
+          categoriesState={categoriesState}
+        />
       </ProductsContainer>
     </ProductsPageTemplateContainer>
   );

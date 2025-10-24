@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import { ItemListProduct } from "../moleculas/ItemListProduct";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavPageList } from "../moleculas/NavPageList";
 
-export const ListProduct = ({ products }) => {
+export const ListProduct = ({ products, categoriesState }) => {
   // Estado para la página actual
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [categoriesState === true]);
+
   // Número de productos por página
   const productsPerPage = 6;
 

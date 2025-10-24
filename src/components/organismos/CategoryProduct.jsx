@@ -3,13 +3,19 @@ import { ItemList } from "../moleculas/ItemList";
 import { AllProduct } from "../../store/AllProducts";
 import { useState } from "react";
 
-export const CategoryProduct = ({ categories }) => {
+export const CategoryProduct = ({
+  categories,
+  setCategoriesState,
+  categoriesState,
+}) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const { setProductsByCategory } = AllProduct();
 
   const handleClick = (category) => {
     setProductsByCategory(category);
     setSelectedCategory(category);
+    setCategoriesState(true);
+    category === "" && setCategoriesState(false);
   };
 
   return (
@@ -24,11 +30,13 @@ export const CategoryProduct = ({ categories }) => {
             selectedCategory={selectedCategory}
           />
         ))}
-        <ItemList
-          key={"all"}
-          item={"all"}
-          handleClick={() => handleClick("")}
-        />
+        {categoriesState && (
+          <ItemList
+            key={"all"}
+            item={"all"}
+            handleClick={() => handleClick("")}
+          />
+        )}
       </CategoryList>
     </CategoryProductContainer>
   );
