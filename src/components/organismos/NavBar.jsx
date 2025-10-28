@@ -4,7 +4,7 @@ import { Input } from "../moleculas/Input";
 import { CiSearch } from "react-icons/ci";
 import { ImgContainer } from "../atomos/ImgContainer";
 
-export const NavBar = ({ cartCount = 1 }) => {
+export const NavBar = ({ cart = 0 }) => {
   return (
     <NavBarContainer>
       <div className="logo">
@@ -17,7 +17,7 @@ export const NavBar = ({ cartCount = 1 }) => {
         icono={CiSearch}
       />
       <CartButton>
-        <CartCount>{cartCount}</CartCount>
+        <CartCount>{cart.length}</CartCount>
         <ImgContainer src={ShoppingBasket} alt="Shopping Cart" />
       </CartButton>
     </NavBarContainer>

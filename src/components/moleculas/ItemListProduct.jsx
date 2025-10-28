@@ -1,7 +1,16 @@
 import styled from "styled-components";
 import { BtnsCard } from "./BtnsCard";
 
-export const ItemListProduct = ({ product }) => {
+export const ItemListProduct = ({ product, addToCart }) => {
+  const addProdutToCart = () => {
+    addToCart({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      lot: 1,
+    });
+  };
   return (
     <ItemListProductContainer key={product.id}>
       <img src={product.image} alt={product.title} />
@@ -12,7 +21,7 @@ export const ItemListProduct = ({ product }) => {
         </Rate>
         <Price>${product.price.toFixed(2)}</Price>
       </RatePriceContainer>
-      <BtnsCard />
+      <BtnsCard addToCart={addProdutToCart} />
     </ItemListProductContainer>
   );
 };

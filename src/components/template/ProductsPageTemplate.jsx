@@ -9,6 +9,7 @@ export const ProductsPageTemplate = ({
   productsAll,
   productsCategory = [],
   categories,
+  addToCart
 }) => {
   const [categoriesState, setCategoriesState] = useState(false);
   return (
@@ -26,6 +27,7 @@ export const ProductsPageTemplate = ({
             productsCategory.length > 0 ? productsCategory : productsAll
           }
           categoriesState={categoriesState}
+          addToCart={addToCart}
         />
       </ProductsContainer>
     </ProductsPageTemplateContainer>

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { ProductsPageTemplate } from "../components/template/ProductsPageTemplate";
 import { AllProduct } from "../store/AllProducts";
+import { ProductCart } from "../store/ProductCart";
 
 export const AllProducts = () => {
   const {
@@ -11,6 +12,8 @@ export const AllProducts = () => {
     fetchCategories,
   } = AllProduct();
 
+  const { addToCart, cart } = ProductCart();
+
   const { isLoading, error } = useQuery({
     queryKey: ["all-products"],
     queryFn: async () => {
@@ -20,7 +23,15 @@ export const AllProducts = () => {
     },
   });
 
+  console.log(cart);
+  
+
   return (
-    <ProductsPageTemplate productsAll={productsAll} productsCategory={productsCategory} categories={categories} />
+    <ProductsPageTemplate
+      productsAll={productsAll}
+      productsCategory={productsCategory}
+      categories={categories}
+      addToCart={addToCart}
+    />
   );
 };
