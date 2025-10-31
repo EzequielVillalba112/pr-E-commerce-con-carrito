@@ -4,12 +4,14 @@ import { ImgContainer } from "../atomos/ImgContainer";
 import { CategoryProduct } from "../organismos/CategoryProduct";
 import { ListProduct } from "../organismos/ListProduct";
 import { useState } from "react";
+import { Input } from "../moleculas/Input";
+import { CiSearch } from "react-icons/ci";
 
 export const ProductsPageTemplate = ({
   productsAll,
   productsCategory = [],
   categories,
-  addToCart
+  addToCart,
 }) => {
   const [categoriesState, setCategoriesState] = useState(false);
   return (
@@ -21,7 +23,20 @@ export const ProductsPageTemplate = ({
       </Hero>
 
       <ProductsContainer>
-        <CategoryProduct categories={categories} setCategoriesState={setCategoriesState} categoriesState={categoriesState} />
+        <SearchCategory>
+          <SearchContainer>
+            <Input
+              type={"text"}
+              placeholder={"Search Products..."}
+              icono={CiSearch}
+            />
+          </SearchContainer>
+          <CategoryProduct
+            categories={categories}
+            setCategoriesState={setCategoriesState}
+            categoriesState={categoriesState}
+          />
+        </SearchCategory>
         <ListProduct
           products={
             productsCategory.length > 0 ? productsCategory : productsAll
@@ -80,4 +95,19 @@ const ProductsContainer = styled.div`
   gap: 20px;
   justify-content: flex-start;
   align-items: start;
+`;
+
+const SearchCategory = styled.div`
+  min-width: 300px;
+`;
+
+const SearchContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+   border: 1px solid #e0e0e0;
 `;

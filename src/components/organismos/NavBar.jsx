@@ -1,23 +1,16 @@
 import styled from "styled-components";
 import ShoppingBasket from "../../assets/icon-ec.svg";
-import { Input } from "../moleculas/Input";
-import { CiSearch } from "react-icons/ci";
 import { ImgContainer } from "../atomos/ImgContainer";
 
-export const NavBar = ({ cart = 0 }) => {
+export const NavBar = ({ cart = 0, openCart, setOpenCart }) => {
   return (
     <NavBarContainer>
       <div className="logo">
         <h1>FakeMart</h1>
       </div>
 
-      <Input
-        type={"text"}
-        placeholder={"Search Products..."}
-        icono={CiSearch}
-      />
-      <CartButton>
-        <CartCount>{cart.length}</CartCount>
+      <CartButton onClick={() => setOpenCart(true)}>
+        <CartCount>{cart}</CartCount>
         <ImgContainer src={ShoppingBasket} alt="Shopping Cart" />
       </CartButton>
     </NavBarContainer>
@@ -51,6 +44,7 @@ const CartButton = styled.button`
   border-radius: 50%;
   background-color: transparent;
   padding: 10px;
+  cursor: pointer;
 `;
 
 const CartCount = styled.div`
