@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const Input = ({ type, placeholder, icono: Icono }) => {
+export const Input = ({ type, placeholder, icono: Icono, value, onChange }) => {
   return (
     <InputContainer>
       {Icono && <Icono />}
-      <input type={type} placeholder={placeholder} />
+      <input type={type} placeholder={placeholder} value={value} onChange={onChange} />
     </InputContainer>
   );
 };

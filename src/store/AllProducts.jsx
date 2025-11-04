@@ -3,6 +3,7 @@ import { create } from "zustand";
 export const AllProduct = create((set, get) => ({
   productsAll: [],
   categories:[],
+  resultSearch: [],
   productsCategory: [],
   fetchProducts: async () => {
     try {
@@ -28,5 +29,15 @@ export const AllProduct = create((set, get) => ({
       (product) => product.category === category
     );
     set({ productsCategory: filteredProducts });
+  },
+  searchProductsByName: (searchTerm) => {
+    const allProducts = get().productsAll;
+    const filteredProducts = allProducts.filter((product) =>
+      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    set({ resultSearch: filteredProducts });
+  },
+  clearSearchResults: () => {
+    set({ resultSearch: [] });
   }
 }));

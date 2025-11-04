@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { ProductsPageTemplate } from "../components/template/ProductsPageTemplate";
 import { AllProduct } from "../store/AllProducts";
 import { ProductCart } from "../store/ProductCart";
+import { useEffect, useState } from "react";
+import { useIsMobile } from "../hooks/Resolution";
 
 export const AllProducts = () => {
   const {
@@ -10,9 +12,23 @@ export const AllProducts = () => {
     categories,
     fetchProducts,
     fetchCategories,
+    searchProductsByName,
+    resultSearch,
+    clearSearchResults
   } = AllProduct();
 
   const { addToCart, cart } = ProductCart();
+
+  const [searchText, setSearchText] = useState("");
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (searchText != "") {
+      searchProductsByName(searchText);
+    }else{
+      clearSearchResults();
+    }
+  }, [searchText]);
 
   const { isLoading, error } = useQuery({
     queryKey: ["all-products"],
@@ -23,7 +39,6 @@ export const AllProducts = () => {
     },
   });
 
-  console.log(cart);
   
 
   return (
@@ -32,6 +47,10 @@ export const AllProducts = () => {
       productsCategory={productsCategory}
       categories={categories}
       addToCart={addToCart}
+      searchText={searchText}
+      setSearchText={setSearchText}
+      resultSearch={resultSearch}
+      isMobile={isMobile}
     />
   );
 };

@@ -12,6 +12,10 @@ export const ProductsPageTemplate = ({
   productsCategory = [],
   categories,
   addToCart,
+  searchText,
+  setSearchText,
+  resultSearch,
+  isMobile,
 }) => {
   const [categoriesState, setCategoriesState] = useState(false);
   return (
@@ -29,17 +33,30 @@ export const ProductsPageTemplate = ({
               type={"text"}
               placeholder={"Search Products..."}
               icono={CiSearch}
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
             />
+            <MessageNoProducts>
+              {resultSearch.length === 0 &&
+                searchText !== "" &&
+                "No products found"}
+            </MessageNoProducts>
           </SearchContainer>
           <CategoryProduct
             categories={categories}
             setCategoriesState={setCategoriesState}
             categoriesState={categoriesState}
+            setSearchText={setSearchText}
+            isMobile={isMobile}
           />
         </SearchCategory>
         <ListProduct
           products={
-            productsCategory.length > 0 ? productsCategory : productsAll
+            productsCategory.length > 0
+              ? productsCategory
+              : resultSearch.length > 0
+              ? resultSearch
+              : productsAll
           }
           categoriesState={categoriesState}
           addToCart={addToCart}
@@ -81,6 +98,26 @@ const Hero = styled.div`
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     z-index: 2;
   }
+
+  @media (max-width: 590px) {
+    h2 {
+      font-size: 5rem;
+    }
+  }
+
+  @media (max-width: 450px) {
+    &{
+      height: 300px;
+    }
+
+    .glass{
+      height: 300px;
+    }
+    h2 {
+      margin-top: 1rem;
+      font-size: 3rem;
+    }
+  }
 `;
 
 const ProductsContainer = styled.div`
@@ -95,19 +132,39 @@ const ProductsContainer = styled.div`
   gap: 20px;
   justify-content: flex-start;
   align-items: start;
+
+  @media (max-width: 860px) {
+    flex-direction: column;
+    margin-top: 0;
+  }
 `;
 
 const SearchCategory = styled.div`
   min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @media (max-width: 860px) {
+    width: 100%;
+    gap: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 const SearchContainer = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10px;
   border-radius: 8px;
-  margin-bottom: 20px;
-   border: 1px solid #e0e0e0;
+  border: 1px solid #e0e0e0;
+`;
+
+const MessageNoProducts = styled.p`
+  font-size: 1rem;
+  color: #ac2121;
 `;

@@ -20,4 +20,9 @@ const BtnsCardContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 12px;
+
+   @media (max-width: 1003px) {
+    flex-direction: column;
+    gap: 8px;
+  }
 `;

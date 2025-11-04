@@ -97,6 +97,15 @@ const TotalContainer = styled.div`
     color: #333333;
     font-weight: 700;
   }
+
+  @media (max-width: 510px) {
+    flex-direction: column;
+
+    button{
+      width:100%;
+      margin-top: 10px;
+    }
+  }
 `;
 
 const BackContainer = styled.div`

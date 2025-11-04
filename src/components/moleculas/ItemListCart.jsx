@@ -15,13 +15,28 @@ export const ItemListCart = ({ item, updateLot, removeFromCart }) => {
           </ContainerPrice>
 
           <QuantityControl>
-            <Btn text="-" bgcolor="#e0e0e0" textcolor="#333" function={() => updateLot(item.id, "decrement")} />
+            <Btn
+              text="-"
+              bgcolor="#e0e0e0"
+              textcolor="#333"
+              function={() => updateLot(item.id, "decrement")}
+            />
             <span style={{ margin: "0 10px" }}>{item.lot}</span>
-            <Btn text="+" bgcolor="#e0e0e0" textcolor="#333" function={() => updateLot(item.id, "increment")} />
+            <Btn
+              text="+"
+              bgcolor="#e0e0e0"
+              textcolor="#333"
+              function={() => updateLot(item.id, "increment")}
+            />
           </QuantityControl>
         </ItemDetails>
       </ItemDetailContainer>
-      <Btn text="Remove" bgcolor="#ff4d4d" textcolor="#fff" function={() => removeFromCart(item.id)} />
+      <Btn
+        text="Remove"
+        bgcolor="#ff4d4d"
+        textcolor="#fff"
+        function={() => removeFromCart(item.id)}
+      />
     </ItemListCartContainer>
   );
 };
@@ -39,6 +54,15 @@ const ItemListCartContainer = styled.div`
     width: 80px;
     height: 80px;
     object-fit: contain;
+  }
+
+  @media (max-width: 510px) {
+    flex-direction: column;
+
+    button{
+      width:100%;
+      margin-top: 10px;
+    }
   }
 `;
 
