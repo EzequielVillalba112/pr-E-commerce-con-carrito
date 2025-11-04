@@ -135,7 +135,6 @@ const ProductsContainer = styled.div`
 
   @media (max-width: 860px) {
     flex-direction: column;
-    margin-top: 0;
   }
 `;
 
