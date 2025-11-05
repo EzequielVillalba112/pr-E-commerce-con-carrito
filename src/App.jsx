@@ -5,10 +5,12 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ProductCart } from "./store/ProductCart";
 import { useState } from "react";
 import { CartPageTemplate } from "./components/template/CartPageTemplate";
+import { Pay } from "./store/Pay";
 
 function App() {
   const { cart, updateLot, removeFromCart } = ProductCart();
   const [openCart, setOpenCart] = useState(false);
+  const { idPreference, fetchPay, clearPreference } = Pay();
   return (
     <ContainerApp>
       <NavBar
@@ -22,6 +24,9 @@ function App() {
           setOpenCart={setOpenCart}
           updateLot={updateLot}
           removeFromCart={removeFromCart}
+          idPreference={idPreference}
+          fetchPay={fetchPay}
+          clearPreference={clearPreference}
         />
       ) : (
         <AllProducts />

@@ -4,6 +4,7 @@ import { AllProduct } from "../store/AllProducts";
 import { ProductCart } from "../store/ProductCart";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "../hooks/Resolution";
+import { Pay } from "../store/Pay";
 
 export const AllProducts = () => {
   const {
@@ -18,7 +19,7 @@ export const AllProducts = () => {
   } = AllProduct();
 
   const { addToCart, cart } = ProductCart();
-
+ 
   const [searchText, setSearchText] = useState("");
   const isMobile = useIsMobile();
 
@@ -38,8 +39,6 @@ export const AllProducts = () => {
       return { products, categories };
     },
   });
-
-  
 
   return (
     <ProductsPageTemplate
