@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Btn } from "../atomos/Btn";
 
-export const BtnsCard = ({ addToCart }) => {
+export const BtnsCard = ({ addToCart, fetchPay }) => {
   return (
     <BtnsCardContainer>
       <Btn
@@ -10,7 +10,7 @@ export const BtnsCard = ({ addToCart }) => {
         textcolor="#1f1f1f"
         function={addToCart}
       />
-      <Btn text="Buy now" bgcolor="#252525" textcolor="#ffffff" />
+      <Btn text="Buy now" bgcolor="#252525" textcolor="#ffffff" function={fetchPay} />
     </BtnsCardContainer>
   );
 };

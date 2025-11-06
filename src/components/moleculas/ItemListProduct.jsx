@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { BtnsCard } from "./BtnsCard";
 
-export const ItemListProduct = ({ product, addToCart }) => {
+export const ItemListProduct = ({
+  product,
+  addToCart,
+  fetchPay,
+}) => {
   const addProdutToCart = () => {
     addToCart({
       id: product.id,
@@ -11,6 +15,18 @@ export const ItemListProduct = ({ product, addToCart }) => {
       lot: 1,
     });
   };
+
+  const payNow = () => {
+    fetchPay([
+      {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        lot: 1,
+      },
+    ]);
+  };
+
   return (
     <ItemListProductContainer key={product.id}>
       <img src={product.image} alt={product.title} />
@@ -21,7 +37,8 @@ export const ItemListProduct = ({ product, addToCart }) => {
         </Rate>
         <Price>${product.price.toFixed(2)}</Price>
       </RatePriceContainer>
-      <BtnsCard addToCart={addProdutToCart} />
+      <BtnsCard addToCart={addProdutToCart} fetchPay={payNow} />
+      
     </ItemListProductContainer>
   );
 };
@@ -70,4 +87,57 @@ const Price = styled.p`
   font-size: 1rem;
   font-weight: 700;
   color: #0f0f0f;
+`;
+const Title = styled.h2`
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #4d4d4d;
+  font-weight: 700;
+`;
+
+const ContainerPay = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100dvh;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.89);
+`;
+
+const Pay = styled.div`
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffff;
+  border-radius: 8px;
+  border: 1px solid #d6d6d6;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  .close {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border: none;
+    background-color: #b11c1c;
+    color: #d6d6d6;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 50%;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #9e1a1a;
+    }
+  }
 `;

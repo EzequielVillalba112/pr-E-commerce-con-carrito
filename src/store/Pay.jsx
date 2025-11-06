@@ -7,9 +7,12 @@ initMercadoPago(import.meta.env.VITE_MERCADO_PAGO_KEY, {
 
 export const Pay = create((set, get) => ({
   idPreference: "",
+  productSelect: [],
 
   fetchPay: async (cart) => {
     try {
+      if (cart.length == 1) set({ productSelect: cart });
+
       const res = await fetch("https://back-cobros.onrender.com/create_preference", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

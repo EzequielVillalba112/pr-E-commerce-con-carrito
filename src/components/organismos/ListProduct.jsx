@@ -3,7 +3,13 @@ import { ItemListProduct } from "../moleculas/ItemListProduct";
 import { useEffect, useState } from "react";
 import { NavPageList } from "../moleculas/NavPageList";
 
-export const ListProduct = ({ products, categoriesState, addToCart }) => {
+export const ListProduct = ({
+  products,
+  categoriesState,
+  addToCart,
+  fetchPay,
+  idPreference,
+}) => {
   // Estado para la página actual
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -26,7 +32,13 @@ export const ListProduct = ({ products, categoriesState, addToCart }) => {
     <Container>
       <ListProductContainer>
         {currentProducts.map((product) => (
-          <ItemListProduct key={product.id} product={product} addToCart={addToCart} />
+          <ItemListProduct
+            key={product.id}
+            product={product}
+            addToCart={addToCart}
+            fetchPay={fetchPay}
+            idPreference={idPreference}
+          />
         ))}
       </ListProductContainer>
       {/* Botones de paginación */}

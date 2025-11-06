@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { ItemListCart } from "../moleculas/ItemListCart";
 import { Btn } from "../atomos/Btn";
 //////////////////
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import { useState } from "react";
+import { Wallet } from "@mercadopago/sdk-react";
 
 export const CartPageTemplate = ({
   cart,
@@ -57,7 +56,9 @@ export const CartPageTemplate = ({
       {idPreference && (
         <ContainerPay>
           <Pay>
-            <button className="close" onClick={clearPreference}>X</button>
+            <button className="close" onClick={clearPreference}>
+              X
+            </button>
             <Title>Pay with</Title>
             <Wallet initialization={{ preferenceId: idPreference }} />
           </Pay>
@@ -173,7 +174,7 @@ const Pay = styled.div`
   justify-content: start;
   align-items: center;
 
-  .close{
+  .close {
     position: absolute;
     height: 40px;
     width: 40px;
@@ -188,7 +189,7 @@ const Pay = styled.div`
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 
-    &:hover{
+    &:hover {
       background-color: #9e1a1a;
     }
   }

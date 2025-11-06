@@ -19,6 +19,7 @@ export const AllProducts = () => {
   } = AllProduct();
 
   const { addToCart, cart } = ProductCart();
+  const {fetchPay, idPreference, clearPreference, productSelect} = Pay();
  
   const [searchText, setSearchText] = useState("");
   const isMobile = useIsMobile();
@@ -50,6 +51,10 @@ export const AllProducts = () => {
       setSearchText={setSearchText}
       resultSearch={resultSearch}
       isMobile={isMobile}
+      fetchPay={fetchPay}
+      idPreference={idPreference}
+      clearPreference={clearPreference}
+      productSelect={productSelect}
     />
   );
 };

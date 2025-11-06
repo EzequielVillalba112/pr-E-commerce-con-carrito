@@ -6,6 +6,7 @@ import { ListProduct } from "../organismos/ListProduct";
 import { useState } from "react";
 import { Input } from "../moleculas/Input";
 import { CiSearch } from "react-icons/ci";
+import { Wallet } from "@mercadopago/sdk-react";
 
 export const ProductsPageTemplate = ({
   productsAll,
@@ -16,8 +17,13 @@ export const ProductsPageTemplate = ({
   setSearchText,
   resultSearch,
   isMobile,
+  fetchPay,
+  idPreference,
+  clearPreference,
+  productSelect
 }) => {
   const [categoriesState, setCategoriesState] = useState(false);
+
   return (
     <ProductsPageTemplateContainer>
       <Hero>
@@ -60,8 +66,23 @@ export const ProductsPageTemplate = ({
           }
           categoriesState={categoriesState}
           addToCart={addToCart}
+          fetchPay={fetchPay}
         />
       </ProductsContainer>
+
+      {idPreference && (
+        <ContainerPay>
+          <Pay>
+            <button className="close" onClick={clearPreference}>
+              X
+            </button>
+            <Title>Buy</Title>
+            <Subtitle> {productSelect[0].title}</Subtitle>
+            <Subtitle>Total: ${productSelect[0].price}</Subtitle>
+            <Wallet initialization={{ preferenceId: idPreference }} />
+          </Pay>
+        </ContainerPay>
+      )}
     </ProductsPageTemplateContainer>
   );
 };
@@ -106,11 +127,11 @@ const Hero = styled.div`
   }
 
   @media (max-width: 450px) {
-    &{
+    & {
       height: 300px;
     }
 
-    .glass{
+    .glass {
       height: 300px;
     }
     h2 {
@@ -166,4 +187,65 @@ const SearchContainer = styled.div`
 const MessageNoProducts = styled.p`
   font-size: 1rem;
   color: #ac2121;
+`;
+
+const ContainerPay = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100dvh;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.89);
+`;
+
+const Pay = styled.div`
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffff;
+  border-radius: 8px;
+  border: 1px solid #d6d6d6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .close {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border: none;
+    background-color: #b11c1c;
+    color: #d6d6d6;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 50%;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #9e1a1a;
+    }
+  }
+`;
+
+const Title = styled.h2`
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #4d4d4d;
+  font-weight: 700;
+`;
+
+const Subtitle = styled.h3`
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #666666;
+  text-align: center;
 `;
