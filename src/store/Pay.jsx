@@ -10,7 +10,7 @@ export const Pay = create((set, get) => ({
 
   fetchPay: async (cart) => {
     try {
-      const res = await fetch("http://localhost:3000/create_preference", {
+      const res = await fetch("https://back-cobros.onrender.com/create_preference", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cart }),
