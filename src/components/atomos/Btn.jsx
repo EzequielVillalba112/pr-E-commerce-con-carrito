@@ -21,7 +21,7 @@ export const Btn = ({
 
 const BtnContainer = styled.button`
   padding: 12px 24px;
-  background-color: ${(props) => props.$bgcolor || "#f7f7f7"};
+  background-color: ${(props) => props.$bgcolor || "#0704a5"};
   color: ${(props) => props.$textcolor || "#333"};
   border: none;
   border-radius: 16px;
